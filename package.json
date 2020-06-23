@@ -1,0 +1,14 @@
+{
+  "name": "gifbox",
+  "version": "1.0.0",
+  "dependencies": {
+    "body-parser": "latest",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "urlsearchparams": "^0.1.1"
+  },
+  "devDependencies": {
+    "ajax": "0.0.4",
+    "axios": "^0.19.2"
+  }
+}
