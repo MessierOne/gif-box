@@ -1,0 +1,15 @@
+language: node_js
+os: linux
+node_js:
+  - '12'
+script: echo "Running jobs Install, Build & Test against $(node -v) ..."
+jobs:
+  include:
+    - stage: Install
+      script:
+        - echo "Installing needed modules"
+        - npm install
+    - stage: Build
+      script:
+        - echo "Running build script ..."
+        - npm run-script build
