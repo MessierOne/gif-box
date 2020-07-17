@@ -1,3 +1,5 @@
+import "../css/index.css";
+
 class GifBox extends HTMLElement {
   constructor() {
     super();
@@ -32,10 +34,6 @@ class GifBox extends HTMLElement {
     attrName === 'keyword' && this.composeElement();
   }
 
-  connectedCallback() {
-    this.composeElement();
-  }
-
   async fetcher(url) {
     const request = await fetch(url, {});
     const { data, response } = await request.json();
@@ -55,7 +53,7 @@ class GifBox extends HTMLElement {
 
       return synonymList[random];
     } catch (e) {
-      console.log('Could not retrieve a similar word: ', e);
+      console.log(`Could not retrieve a synonym for ${keyword}: ${e}`);
       return keyword;
     }
   }
@@ -87,16 +85,13 @@ class GifBox extends HTMLElement {
           ? `<img src='${url}' alt='${keyword}' loading="lazy"/>`
           : `<video controls><source src='${mp4}' type="video/mp4">Your browser does not support the video tag.</video>`;
 
-        this.innerHTML = `<div class='gifbox' style='width:${width}; height: ${height}'></br>${component}</div>`;
+        this.innerHTML = `<div class='gifbox' style='width:${width}px; height: ${height}px'></br>${component}</div>`;
       } catch (e) {
-        console.log(e)
+        console.log(e);
       }
     }
   }
 }
 
-try {
-  exports.module = customElements.define('gif-box', GifBox);
-} catch (e) {
-  customElements.define('gif-box', GifBox);
-}
+export default customElements.define('gif-box', GifBox);
+

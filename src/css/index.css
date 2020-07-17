@@ -2,10 +2,15 @@
     display: flex;
 }
 
+img {
+    height: 100%;
+    width: 100%;
+}
+
 gif-box {
     display: flex;
     justify-content: center;
-    height: 100vh;
-    width: 100vw;
+    height: -webkit-fill-available;
+    width: 100%;
     align-items: center;
 }

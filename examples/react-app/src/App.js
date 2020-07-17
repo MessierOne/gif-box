@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import './gifbox';
+import 'gif-box';
 
 function App() {
   return (
