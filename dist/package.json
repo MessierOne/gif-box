@@ -1,0 +1,25 @@
+{
+  "name": "gif-box",
+  "version": "1.0.0",
+  "description": "Web component for random Gif generator, using Giphy API.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MessierOne/gif-box.git"
+  },
+  "keywords": [
+    "giphy",
+    "gifs",
+    "open-source",
+    "opensource",
+    "npm-package",
+    "npm-module"
+  ],
+  "author": "Olayinka Otuniyi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MessierOne/gif-box/issues"
+  },
+  "homepage": "https://github.com/MessierOne/gif-box#readme",
+  "dependencies": {}
+}

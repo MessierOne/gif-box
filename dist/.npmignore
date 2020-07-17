@@ -1,0 +1,5 @@
+.gitmodules
+deps
+node_modules
+test
+coverage
