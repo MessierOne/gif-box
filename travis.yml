@@ -1,7 +1,7 @@
 language: node_js
 os: linux
 node_js:
-  - '12'
+  - '9'
 script: echo "Running jobs Install, Build & Test against $(node -v) ..."
 jobs:
   include:
