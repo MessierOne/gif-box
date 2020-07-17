@@ -13,5 +13,3 @@ jobs:
       script:
         - echo "Running build script ..."
         - npm run build
-
-  4whuv@%7dCn
