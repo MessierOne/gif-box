@@ -100,3 +100,4 @@ try {
 } catch (e) {
   customElements.define('gif-box', GifBox);
 }
+

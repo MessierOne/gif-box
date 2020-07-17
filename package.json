@@ -5,6 +5,7 @@
     "body-parser": "latest",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "synonyms": "^1.0.1",
     "urlsearchparams": "^0.1.1"
   },
   "devDependencies": {
