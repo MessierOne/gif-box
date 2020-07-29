@@ -10,7 +10,6 @@ img {
 gif-box {
     display: flex;
     justify-content: center;
-    height: -webkit-fill-available;
     width: 100%;
     align-items: center;
 }
