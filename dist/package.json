@@ -1,6 +1,6 @@
 {
   "name": "gifbox",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Web component for random Gif generator, using Giphy API.",
   "main": "index.js",
   "repository": {
