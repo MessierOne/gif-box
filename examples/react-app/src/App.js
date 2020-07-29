@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <gif-box className="App-logo" keyword="happiness"></gif-box>
+        <gif-box className="App-logo" keyword="hello"></gif-box>
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>

@@ -21,7 +21,7 @@ import "gif-box";
 Usage in index.html 
 ``` html
 <head>
-    <script src="cdn" type="text/javascript"></script>
+    <script src="https://messier-one-bucket-eu-west-2.s3.eu-west-2.amazonaws.com/index.js" type="text/javascript"></script>
 </head>
 
 <body>
