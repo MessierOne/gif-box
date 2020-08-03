@@ -1,17 +1,10 @@
 const {resolve} = require("path");
-const {DefinePlugin} = require("webpack");
 const autoprefixer = require("autoprefixer");
 
-module.exports = () => ({
+module.exports = {
     mode: 'production',
     entry: "./src/js/index.js",
-    plugins: [
-        new DefinePlugin({
-            "process.env": {
-                SKIP_PREFLIGHT_CHECK: true
-            }
-        })
-    ],
+    plugins: [],
     output: {
         filename: "index.js",
         path: resolve(__dirname, "dist"),
@@ -53,4 +46,4 @@ module.exports = () => ({
             },
         ],
     }
-});
+};

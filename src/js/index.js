@@ -1,39 +1,38 @@
 import "../css/index.css";
 
 class GifBox extends HTMLElement {
-    constructor(word, size) {
+    constructor(word, size, shuffle) {
         super();
         this._wordAttr = word || null;
         this._sizeAttr = size || null;
+        this._shuffleAttr = shuffle === "" ? true : false;
+        this.queue = [];
     }
 
     static get observedAttributes() {
-        return ['keyword', 'size'];
+        return ['keyword', 'size', 'shuffle'];
     }
 
     get keyword() {
         return this._wordAttr;
     }
 
-    set keyword(gif) {
-        this.setAttribute('keyword', gif);
-    }
-
     get size() {
         return this._sizeAttr;
     }
 
-    set size(string) {
-        this.setAttribute('size', string);
+    get shuffle() {
+        return this._shuffleAttr;
     }
 
     attributeChangedCallback(attrName, oldValue, newValue) {
-        const attributeName = attrName === 'size' ? '_sizeAttr' : '_wordAttr';
+        const attributeName = (attrName === 'size') ? '_sizeAttr' : (attrName === 'keyword') ? '_wordAttr' : '_shuffleAttr';
 
         if (newValue !== oldValue) {
-            this[attributeName] = newValue;
+            this[attributeName] = newValue || Boolean(!newValue.length);
         }
-        attrName === 'keyword' && this.composeElement();
+
+        this.composeElement();
     }
 
     async fetcher(url) {
@@ -47,14 +46,19 @@ class GifBox extends HTMLElement {
         try {
             const response = await this.fetcher(url);
 
-            const synonymList = response?.slice(0, 50).map(({word}) => word);
-            const random = Math.floor(Math.random() * Math.floor(synonymList?.length - 1));
+            const synonymList = [{word: keyword}, ...response]?.slice(0, 10).map(({word}) => word);
+            this.queue = synonymList;
 
-            return synonymList[random];
+            return this.queue[0];
         } catch (e) {
             console.log(`Could not retrieve a related word to ${keyword}: ${e}`);
             return keyword;
         }
+    }
+
+    getQueue() {
+        this.queue.shift();
+        return this.queue[0] || this.getSynonym(this._wordAttr);
     }
 
     async getGif(synonym) {
@@ -82,18 +86,27 @@ class GifBox extends HTMLElement {
 
     async composeElement() {
         if (this._wordAttr) {
-            const keyword = this._wordAttr?.replace(" ", '+');
+            const word = this._wordAttr?.replace(" ", '+');
             try {
-                const synonym = await this.getSynonym(keyword);
+                const synonym = this.queue.length ? this.getQueue() : await this.getSynonym(word);
                 const {url, mp4, width, height} = await this.getGif(synonym);
 
+                const shuffleIcon = this._shuffleAttr ? `<button id="gif-box-shuffle-btn" class="ui-btn">Shuffle</button>` : '<div></div>';
                 const component = url
-                    ? `<img src='${url}' alt='${keyword}' loading="lazy"/>`
-                    : `<video controls><source src='${mp4}' type="video/mp4">Your browser does not support the video tag.</video>`;
-                return this.innerHTML = (`<div class='gifbox' style='width:${width}px; height: ${height}px'></br>${component}</div>`);
+                    ? `<img id="gif-box-img" src='${url}' alt='${word}' loading="lazy"/>`
+                    : `<video id="gif-box-vid" controls><source src='${mp4}' type="video/mp4">Your browser does not support the video tag.</video>`;
+
+                this.innerHTML = (`<div id="gif-box-div" class='gifbox' style='width:${width}px; height: ${height}px'>${shuffleIcon}${component}</div>`);
+                const button = document.getElementById("gif-box-shuffle-btn");
+                if (button && button.addEventListener && this._shuffleAttr) {
+                    button.addEventListener('click', () => {
+                        this.composeElement();
+                    }, false);
+                }
+                return this.innerHTML;
             } catch (e) {
                 console.log(e);
-                return this.innerHTML = "<img src='https://gph.is/2Faj7oP' alt='no gif' loading='lazy'/>";
+                return this.innerHTML = "<img src='https://media.giphy.com/media/KVVQ9vB3dSbZLYMf9n/giphy.gif' alt='no gif' loading='lazy'/>";
             }
         }
     }

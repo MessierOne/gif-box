@@ -25,7 +25,7 @@ Usage in index.html
 </head>
 
 <body>
-    <gif-box size="medium" keyword="unicorn"></gif-box>
+    <gif-box size="medium" keyword="unicorn" shuffle></gif-box>
 </body>
 ```
 
@@ -33,5 +33,6 @@ Usage in index.html
 
 |      Property      |         Value          |
 |--------------------|------------------------|
+| word (required)    | *                      |
 | size (optional)    | small / medium / large |
-| keyword (required) | *                      |
+| shuffle (optional) | boolean                |
